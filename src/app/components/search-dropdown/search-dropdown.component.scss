@@ -1,0 +1,78 @@
+.wrapper {
+    width: 80%;
+    margin: 0 auto;
+    .background-image {
+        background-image: url("../../../assets/popcorn.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        position: fixed;
+        height: 500px;
+        width: 550px;
+        z-index: -100;
+    }
+    .search-dropdown {
+        width: 40%;
+        margin: 0 auto;
+        font-family: "Comic Sans MS", cursive, sans-serif;
+        padding-top: 15px;
+        .search {
+            width: 100%;
+            margin: 5px 15px 0 0;
+            position: relative;
+            display: flex;
+            input {
+                width: 90%;
+                padding: 0 5px;
+                font-size: 16px;
+                border: none;
+                border-bottom: 1px solid #c2cfd6;
+                font-family: "Comic Sans MS", cursive, sans-serif;
+                outline: none;
+                box-shadow: none;
+                background-color: transparent;
+            }
+            input:focus {
+                box-shadow: 0 4px 2px -2px #d2eaff !important;
+            }
+            button {
+                border: none;
+                background: 0;
+                padding: 0;
+                outline: none;
+                &:active, &:focus {
+                    outline: none;
+                }
+            }
+            .fa-search {
+                padding: 8px;
+                border-bottom: 1px solid #c2cfd6;
+                cursor: pointer;
+                z-index: 1000;
+            }
+            input:focus + button .fa-search {
+                box-shadow: 0 4px 2px -2px #d2eaff !important;
+            }
+        }
+        .dropdown {
+            position: absolute;
+            background-color: #f9f9f9;
+            width: 30.7%;
+            z-index: 100;
+            max-height: 500px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            .movie {
+                padding: 7px 10px;
+                width: 100%;
+                cursor: pointer;
+                &:hover {
+                    background-color: #efefef;
+                }
+            }
+        }
+    }
+}
+
+*:focus {
+    outline: none;
+}

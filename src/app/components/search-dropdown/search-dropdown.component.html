@@ -1,0 +1,17 @@
+<div class="wrapper">
+    <div class="background-image"></div>
+    <form (submit)="searchForMovies(); isSearching = true; dropdown.focus()">
+        <div class="search-dropdown">
+            <h2> Search for movies </h2>
+            <div class="search">
+                <input placeholder="Search movies.." [(ngModel)]="movieInput" name="movieInput" required autocomplete="off" (keydown.ArrowDown)="searchForMovies(); dropdown.focus();">
+                <button><i class="fa fa-search"></i></button>
+            </div>
+            <div class="dropdown" #dropdown tabindex="0" (focusout)="isSearching = false; movies = []">
+                <div class="movie" *ngFor="let movie of movies" (click)="movieInput = movie.title; movies = []">
+                    {{movie.title}}
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
