@@ -1,13 +1,13 @@
 <div class="wrapper">
     <div class="background-image"></div>
-    <form (submit)="searchForMovies(); dropdown.focus()">
-        <div class="search-dropdown">
+    <form (submit)="searchForMovies(); dropdown.focus();">
+        <div class="search-dropdown" (keydown.escape)="movies = []; search.focus();">
             <h2> Search for movies </h2>
             <div class="search">
-                <input placeholder="Search movies.." [(ngModel)]="movieInput" name="movieInput" required autocomplete="off" (keydown.ArrowDown)="searchForMovies(); dropdown.focus();">
+                <input placeholder="Search movies.." #search [(ngModel)]="movieInput" name="movieInput" required autocomplete="off" (keydown.ArrowDown)="searchForMovies(); dropdown.focus();">
                 <button><i class="fa fa-search"></i></button>
             </div>
-            <div class="dropdown" #dropdown tabindex="0" (focusout)="isSearching = false; movies = []" (keydown)="focusMovie($event)">
+            <div class="dropdown" #dropdown tabindex="0" (focusout)="movies = []; search.focus();" (keydown)="focusMovie($event)">
                 <div class="movie" *ngFor="let movie of movies" (click)="movieInput = movie.title; movies = []">
                     {{movie.title}}
                 </div>
@@ -15,3 +15,33 @@
         </div>
     </form>
 </div>
+
+
+
+
+
+
+<!--  Version 2, In case when search should be implemented inside of another form
+put this part inside of wrapper just under background-image div
+
+<div class="search-dropdown" (keydown.escape)="movies = []; position = 0; search.focus()">
+    <h2> Search for movies </h2>
+    <div class="search">
+        <input placeholder="Search movies.." #search [(ngModel)]="movieInput" name="movieInput" required autocomplete="off"
+            (keydown.ArrowDown)="searchForMovies(); dropdown.focus();" (keydown.enter)="searchForMovies(); dropdown.focus()">
+        <button (click)="searchForMovies(); dropdown.focus()"><i class="fa fa-search"></i></button>
+    </div>
+        <div class="dropdown" #dropdown tabindex="0" (focusout)="movies = []; position = 0; search.focus()" (keydown)="focusMovie($event)">
+        <div class="movie" *ngFor="let movie of movies" (click)="movieInput = movie.title; movies = []">
+            {{movie.title}}
+        </div>
+    </div>
+</div>
+
+
+
+In case we wanna search after each key being pressed just like browsers do, we just shall bind these 
+(keydown.ArrowDown)="searchForMovies(); dropdown.focus();" (keydown.enter)="searchForMovies(); dropdown.focus()"  calls to
+this one: (keydown)="searchForMovies(); dropdown.focus();"
+
+-->

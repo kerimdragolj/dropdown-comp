@@ -9,7 +9,6 @@ import { SearchDropdownService } from '../../services/search-dropdown.service';
 export class SearchDropdownComponent implements OnInit {
     movieInput: string = '';
     movies: any[] = [];
-    isSearching: boolean = false;
     apiKey: string = '2638b020571c78301f92e4a1b01150da';
     position: number = -1;
 
@@ -21,7 +20,6 @@ export class SearchDropdownComponent implements OnInit {
 
     async searchForMovies() {
         if(this.movieInput) {
-            this.isSearching = true;
             await this.searchDropdownService.searchForMovie(this.movieInput, this.apiKey).subscribe(res => {
                 this.movies = res.results;
                 this.position = -1;
@@ -34,25 +32,24 @@ export class SearchDropdownComponent implements OnInit {
     focusMovie(e) {
         e.preventDefault();
         let focused = document.getElementById('focus');
-        if (e.keyCode == 38) {
+        if (e.keyCode == 38) { //arrow up
             if(this.position > 0) {
                 if(focused) {
                     focused.id = '';
                 }
                 this.position--;
             }
-        } else if(e.keyCode == 40) {
+        } else if(e.keyCode == 40) { //arrow down
             if(this.position < this.movies.length - 1) {
                 if(focused) {
                     focused.id = '';
                 }
                 this.position++;
             }
-        } else if(e.keyCode == 13) {
+        } else if(e.keyCode == 13) { //enter
             if(focused) {
                 this.movieInput = focused.innerHTML.trim();
                 this.movies = [];
-                this.isSearching = false;
             }
         }
         
